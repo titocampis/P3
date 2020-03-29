@@ -104,7 +104,7 @@ Ejercicios básicos
     
     Finalmente nuestro resultado con el código final es el siguiente:
     
-    <img src="img/4.jpeg" width="640" align="center">
+    <img src="img/resultado.png" width="640" align="center">
     
     Consideramos que un 77,92% es un resultado óptimo.
 	
