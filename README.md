@@ -101,6 +101,12 @@ Ejercicios básicos
     con el sin offset y es el que dejamos implementado como se puede ver en la siguiente captura:
     
     <img src="img/4.jpeg" width="640" align="center">
+    
+    Finalmente nuestro resultado con el código final es el siguiente:
+    
+    <img src="img/resultado.png" width="640" align="center">
+    
+    Consideramos que un 77,92% es un resultado óptimo.
 	
 
    * Inserte una gráfica en la que se vea con claridad el resultado de su detector de pitch junto al del
