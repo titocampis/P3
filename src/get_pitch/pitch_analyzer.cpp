@@ -59,7 +59,7 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    if ((pot > -40 && r1norm > 0.95) || rmaxnorm > 0.63) return false;
+    if ((pot > -30 && r1norm > 0.85) || rmaxnorm > 0.63) return false;
     else return true;
   }
 
@@ -90,10 +90,10 @@ namespace upc {
     float pot = 10 * log10(r[0]);
 
     float maximum = 0;
-    int max = samplingFreq/70;
-    int min = samplingFreq/490;
+    int max = samplingFreq/150;
+    int min = samplingFreq/600;
 
-    for (int i = min-1; i < max+1; i++) {
+    for (int i = min; i <= max; i++) {
       if (r[i] >= maximum) {
         lag = i;
         maximum = r[i];
