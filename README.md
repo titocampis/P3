@@ -14,6 +14,12 @@ Ejercicios básicos
   `get_pitch`.
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
+   
+   Para el cálculo de la autocorrelación lo hacemos de la siguiente manera.
+   
+   <img src="img/1.jpeg" width="640" align="center">
+   
+   
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un sonido sonoro
      y su periodo de pitch; y, en otro *subplot*, se vea con claridad la autocorrelación de la señal y la
@@ -24,8 +30,24 @@ Ejercicios básicos
 
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
+     
+     Para calcular el segundo pico de la autocorrelación, nos definimos unos límites en los cuales buscar el máximo en la
+     función de autocorrelación. Para definir esos límites usamos la frecuencia de muestreo, que sabemos que estará
+     íntimamente relacionada con la posición en la que se encontrará este segundo máximo. Tenemos en los apuntes que el pitch
+     humano oscila entre 75 - 500 Hz, así nos definimos las k’s entre las que se encontrará nuestro máximo (fm/75 - fm/500). Y
+     hemos probado otros valores y más o menos conseguimos un valor final parecido.
+     
+     <img src="img/2.jpeg" width="640" align="center">
+
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
+   
+   Para determinar estos límites, hemos observado algunas señales para tomar como referencia sus valores, a partir de ahí,
+   también hemos jugado un poco con qué valores nos proporcionaban una mejor puntuación final y cuáles no. Nos hemos quedado
+   con los que nos daban mejor puntuación.
+   
+   <img src="img/3.jpeg" width="640" align="center">
+   
 
 - Una vez completados los puntos anteriores, dispondrá de una primera versión del detector de pitch. El 
   resto del trabajo consiste, básicamente, en obtener las mejores prestaciones posibles con él.
@@ -48,8 +70,20 @@ Ejercicios básicos
 		ilustrativa del resultado de ambos detectores.
   
   * Optimice los parámetros de su sistema de detección de pitch e inserte una tabla con las tasas de error
-    y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
-	`pitch_db/train`..
+    y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos `pitch_db/train`..
+    
+    Para intentar mejorar la puntuación, a parte de optimizar los valores que utilizabamos en las funciones como límites tal,
+    hemos intentado hacer muchas cosas, de las cuales pocas han salido bien. Hemos intentado varios fistros pasos bajo: desde
+    intentar implementar uno con MATLAB y filterDesginer y luego convolucionar, a implementarlo por definición (según una
+    definición rara de wikipedia) y hemos intentado un filtro que parecía bueno, pero solo lo parecía, mediante la
+    transformada de Fourier. Después de descubrir que los filtros paso bajo no eran lo nuestro, y que todos empeoraban el
+    resultado final. dejamos esos fistros y nos pusimos con el center-clipping. 
+    
+    Con el center-clipping tuvimos algo más de suerte, probamos ambos: con y sin offset. Finalmente, obtuvimos mejor resultado
+    con el sin offset y es el que finalmente dejamos implementado.
+    
+    <img src="img/4.jpeg" width="640" align="center">
+	
 
    * Inserte una gráfica en la que se vea con claridad el resultado de su detector de pitch junto al del
      detector de Wavesurfer. Aunque puede usarse Wavesurfer para obtener la representación, se valorará
