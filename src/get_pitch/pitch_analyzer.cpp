@@ -90,10 +90,12 @@ namespace upc {
     float pot = 10 * log10(r[0]);
 
     float maximum = 0;
-    int max = samplingFreq/150;
-    int min = samplingFreq/600;
+    // Buscamos los periodos de repetición entre los cuales estará nuestra señal
+    // Es decir entre los valores que encontraremos nuestro pitch expresados en r[l]})
+    int max_l = samplingFreq/150;
+    int min_l = samplingFreq/600;
 
-    for (int i = min; i <= max; i++) {
+    for (int i = min_l; i <= max_l; i++) {
       if (r[i] >= maximum) {
         lag = i;
         maximum = r[i];

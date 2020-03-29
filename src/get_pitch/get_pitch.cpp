@@ -147,11 +147,21 @@ int main(int argc, const char *argv[]) {
 
   //====================================================================================================
 
-  // Center-Clipping =========================================
+  // Center-Clipping Con Offset =========================================
+  /*float maximum_value = *max_element(x.begin(), x.end());
+  float threshold = 0.075*maximum_value;
+  for (int i = 0; i < x.size(); i++){
+    if(x[i] > threshold) x[i] = x[i]-threshold;
+    else if (x[i] < - threshold) x[i] = x[i] +threshold;
+    else x[i] = 0;
+  }*/
+  // ==========================================================
+
+  // Center-Clipping Sin Offset =========================================
   float maximum_value = *max_element(x.begin(), x.end());
   float threshold = 0.075*maximum_value;
-  for (int i =0; i < x.size(); i++){
-    if(abs(x[i]) <= threshold) x[i] = 0;
+  for (int i = 0; i < x.size(); i++){
+    if(abs(x[i]) < threshold) x[i] = 0;
   }
   // ==========================================================
 
