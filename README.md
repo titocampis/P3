@@ -15,10 +15,9 @@ Ejercicios básicos
 
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
    
-   Para el cálculo de la autocorrelación lo hacemos de la siguiente manera.
+   Para el cálculo de la autocorrelación lo hacemos de la siguiente manera:
    
    <img src="img/1.jpeg" width="640" align="center">
-   
    
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un sonido sonoro
@@ -34,17 +33,17 @@ Ejercicios básicos
      Para calcular el segundo pico de la autocorrelación, nos definimos unos límites en los cuales buscar el máximo en la
      función de autocorrelación. Para definir esos límites usamos la frecuencia de muestreo, que sabemos que estará
      íntimamente relacionada con la posición en la que se encontrará este segundo máximo. Tenemos en los apuntes que el pitch
-     humano oscila entre 75 - 500 Hz, así nos definimos las k’s entre las que se encontrará nuestro máximo (fm/75 - fm/500). Y
-     hemos probado otros valores y más o menos conseguimos un valor final parecido.
+     humano oscila entre 75 - 500 Hz, así nos definimos las k’s entre las que se encontrará nuestro máximo (fm/75 - fm/500).
+     Hemos probado distintos valores y más o menos conseguimos un valor final parecido.
      
      <img src="img/2.jpeg" width="640" align="center">
 
 
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
    
-   Para determinar estos límites, hemos observado algunas señales para tomar como referencia sus valores, a partir de ahí,
-   también hemos jugado un poco con qué valores nos proporcionaban una mejor puntuación final y cuáles no. Nos hemos quedado
-   con los que nos daban mejor puntuación.
+   Para determinar estos límites, hemos observado algunas señales para tomar como referencia sus valores y a partir de ahí
+   hemos jugado un poco con qué valores nos proporcionaban una mejor puntuación final y cuáles no. Para acabar esta parte, nos
+   hemos quedado con los que nos daban mejor puntuación que son los que se pueden ver en la siguiente captura:
    
    <img src="img/3.jpeg" width="640" align="center">
    
@@ -59,11 +58,30 @@ Ejercicios básicos
 	    principales candidatos para determinar la sonoridad de la voz: el nivel de potencia de la señal
 		(r[0]), la autocorrelación normalizada de uno (r1norm = r[1] / r[0]) y el valor de la
 		autocorrelación en su máximo secundario (rmaxnorm = r[lag] / r[0]).
-
+		
+	En nuestro caso al ser usuarios de MAC los dos, no tenemos wavesurfer sino que usamos el audacity. Seguimos teniendo
+	problemas con este programa ya que así como en wavesurfer al crear una nueva pista, el programa te presenta la opción
+	de mostrar el contorno de pitch, en audacity no hemos visto en ninguno de los sitios que hemos consultado que esto
+	exista ya que no lo utilizan. En el caso de este programa en referencia al pitch tenemos un apartado en la sección de
+	efectos que nos permite cambiar el pitch, y ahí podemos ver el pitch actual que tenemos, que como se puede ver en la
+	siguiente captura es de unos 150Hz:
+	
+	<img src="img/pitch.png" width="640" align="center">
+	
+	Para la correlación, si que hemos podido encontrar la gráfica, y además podemos exportar los valores a un fichero .txt
+	del que también adjuntamos captura. Gracias a esto podemos tener los valores más importantes que eran los que
+	necesitabamos.
+	
+	<img src="img/autocor.png" width="640" align="center">
+	
+	<img src="img/valores_autocor.png" width="640" align="center">
+	
+	
 		Puede considerar, también, la conveniencia de usar la tasa de cruces por cero.
 
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
 		en esta práctica es de 15 ms.
+		
 
       - Use el detector de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare
 	    su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica
@@ -72,15 +90,15 @@ Ejercicios básicos
   * Optimice los parámetros de su sistema de detección de pitch e inserte una tabla con las tasas de error
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos `pitch_db/train`..
     
-    Para intentar mejorar la puntuación, a parte de optimizar los valores que utilizabamos en las funciones como límites tal,
-    hemos intentado hacer muchas cosas, de las cuales pocas han salido bien. Hemos intentado varios fistros pasos bajo: desde
-    intentar implementar uno con MATLAB y filterDesginer y luego convolucionar, a implementarlo por definición (según una
-    definición rara de wikipedia) y hemos intentado un filtro que parecía bueno, pero solo lo parecía, mediante la
-    transformada de Fourier. Después de descubrir que los filtros paso bajo no eran lo nuestro, y que todos empeoraban el
-    resultado final. dejamos esos fistros y nos pusimos con el center-clipping. 
+    Para intentar mejorar la puntuación, además de optimizar los valores que utilizabamos en las funciones como límites entre
+    otros, hemos intentado hacer muchas cosas, de las cuales pocas han salido bien. Hemos intentado varios fistros pasos bajo:
+    desde intentar implementar uno con MATLAB y filterDesginer y luego convolucionar, a implementarlo por definición (según
+    una definición rara de wikipedia). También hemos intentado un filtro que parecía bueno, pero solo lo parecía, mediante la
+    transformada de Fourier. Después de descubrir que con los filtros paso bajo no llegabamos a buen puerto y que todos
+    empeoraban el resultado final al ser aplicados, dejamos esos fistros y nos pusimos con el center-clipping. 
     
-    Con el center-clipping tuvimos algo más de suerte, probamos ambos: con y sin offset. Finalmente, obtuvimos mejor resultado
-    con el sin offset y es el que finalmente dejamos implementado.
+    Con el center-clipping tuvimos algo más de suerte. Probamos ambos: con y sin offset. Finalmente, obtuvimos mejor resultado
+    con el sin offset y es el que dejamos implementado como se puede ver en la siguiente captura:
     
     <img src="img/4.jpeg" width="640" align="center">
 	
